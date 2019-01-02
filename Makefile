@@ -17,4 +17,4 @@ $(STLS) $(SCADS): Makefile
 
 .PHONY: clean
 clean:
-	rm -fv $(SCADS:.scad=.stl) $(wildcard *:*x*.scad)
+	rm -fv $(STLS) $(SCADS)

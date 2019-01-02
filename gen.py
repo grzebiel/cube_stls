@@ -11,7 +11,11 @@ configs = [
 
 env = Environment(loader=FileSystemLoader('templates'),
                   trim_blocks=True, lstrip_blocks=True)
-template = env.get_template("cube.scad")
+
+templates = {
+    "simple": env.get_template("cube.scad"),
+    "45": env.get_template("45_cube.scad"),
+}
 
 for config in configs:
     cfg = {}
@@ -19,5 +23,6 @@ for config in configs:
     cfg['times'] = rt[2]
     cfg['width'] = rt[0]
     cfg['space'] = rt[1]
-    with open(config + '.scad', 'w') as cfg_file:
-        cfg_file.write(template.render(cfg))
+    for name, template in templates.items():
+        with open(name + "_" + config + '.scad', 'w') as cfg_file:
+            cfg_file.write(template.render(cfg))
